@@ -18,6 +18,8 @@ if (process.env.NODE_ENV !== 'production') {
   // Require async routes only in development for react-hot-reloader to work.
   require('./modules/Todo/pages/TodoListPage');
   require('./modules/Auth/pages/SignUpPage');
+   require('./modules/Auth/pages/LoginPage');
+   require('./modules/App/components/WelcomePage');
 }
 // remove tap delay, essential for MaterialUI to work properly
 
@@ -29,12 +31,12 @@ export default (
     <IndexRoute
       getComponent={(nextState, cb) => {
         require.ensure([], require => {
-          cb(null, require('./modules/Auth/pages/SignUpPage').default);
+          cb(null, require('./modules/Todo/pages/TodoListPage').default);
         });
       }}
     />
     <Route
-      path="/todo"
+      path="/todo" component={App}
       getComponent={(nextState, cb) => {
         require.ensure([], require => {
           cb(null, require('./modules/Todo/pages/TodoListPage').default);
@@ -57,7 +59,18 @@ export default (
         });
       }}
     />
+  <Route
+      path="/wel"
+      getComponent={(nextState, cb) => {
+        require.ensure([], require => {
+          cb(null, require('./modules/App/components/WelcomePage').default);
+        });
+      }}
+    />
+
   </Route>
- 
+
+
+
      
 );

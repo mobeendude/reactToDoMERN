@@ -1,5 +1,7 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Card, CardText } from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
@@ -11,6 +13,7 @@ const LoginForm = ({
   errors,
   user
 }) => (
+ <MuiThemeProvider>
   <Card className="container">
     <form action="/" onSubmit={onSubmit}>
       <h2 className="card-heading">Login</h2>
@@ -45,6 +48,7 @@ const LoginForm = ({
       <CardText>Don't have an account? <Link to={'/signup'}>Create one</Link>.</CardText>
     </form>
   </Card>
+   </MuiThemeProvider>
 );
 
 LoginForm.propTypes = {

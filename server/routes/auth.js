@@ -113,7 +113,7 @@ console.log("reached here");
   })(req, res, next);
 });
 
-router.post('/login', (req, res) => {
+router.post('/login', (req, res,next) => {
   const validationResult = validateLoginForm(req.body);
   if (!validationResult.success) {
     return res.status(400).json({

@@ -59,4 +59,9 @@ module.exports = {
       include: path.join(__dirname, './node_modules/'),
     }),
   ],
+  devServer: {
+    historyApiFallback: true,
+    contentBase: './',
+    hot: true
+  },
 };

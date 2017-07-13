@@ -1,5 +1,3 @@
-
-
 import React, { PropTypes } from 'react';
 import Auth from './Auth';
 import LoginForm from '../components/LoginForm.jsx';
@@ -12,15 +10,18 @@ class LoginPage extends React.Component {
    */
   constructor(props, context) {
     super(props, context);
+     let successMessage = '';
+if(typeof(Storage) !== "undefined"){
+   //use the local storage
 
     const storedMessage = localStorage.getItem('successMessage');
-    let successMessage = '';
+   
 
     if (storedMessage) {
       successMessage = storedMessage;
       localStorage.removeItem('successMessage');
     }
-
+}
     // set the initial component state
     this.state = {
       errors: {},
@@ -56,19 +57,16 @@ class LoginPage extends React.Component {
     xhr.responseType = 'json';
     xhr.addEventListener('load', () => {
       if (xhr.status === 200) {
-        // success
-
-        // change the component-container state
+        
         this.setState({
           errors: {}
         });
 
-        // save the token
         Auth.authenticateUser(xhr.response.token);
 
 
         // change the current URL to /
-        this.context.router.replace('/');
+        this.context.router.replace('/todo');
       } else {
         // failure
 
