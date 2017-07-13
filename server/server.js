@@ -13,7 +13,6 @@ import webpackHotMiddleware from 'webpack-hot-middleware';
 
 // Initialize the Express App
 const app = new Express();
-
 // Run Webpack dev server in development mode
 if (process.env.NODE_ENV === 'development') {
   const compiler = webpack(config);
@@ -28,6 +27,17 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { match, RouterContext } from 'react-router';
 import Helmet from 'react-helmet';
+require("./models/user");
+const passport = require('passport');
+const authCheckMiddleware = require('./middleware/auth-check');
+app.use(passport.initialize());
+const localSignupStrategy = require('./passport/local-signup');
+const localLoginStrategy = require('./passport/local-login');
+passport.use('local-signup', localSignupStrategy);
+passport.use('local-login', localLoginStrategy);
+
+
+
 
 // Import required modules
 import routes from '../client/routes';
@@ -57,8 +67,13 @@ app.use(bodyParser.json({ limit: '20mb' }));
 app.use(bodyParser.urlencoded({ limit: '20mb', extended: false }));
 app.use(Express.static(path.resolve(__dirname, '../dist')));
 app.use(Express.static(path.resolve(__dirname, './resources')));
+
+app.use('/api', authCheckMiddleware);
+
 app.use('/api/todos', todos);
 app.use('/api/auth', auth);
+const authRoutes = require('./routes/auth');
+app.use('/auth', authRoutes);
 /*
 
 MObeen
