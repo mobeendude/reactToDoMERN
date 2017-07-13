@@ -19,20 +19,22 @@ if (process.env.NODE_ENV !== 'production') {
   require('./modules/Todo/pages/TodoListPage');
   require('./modules/App/components/WelcomePage');
 }
+// remove tap delay, essential for MaterialUI to work properly
 
 // react-router setup with code-splitting
 // More info: http://blog.mxstbr.com/2016/01/react-apps-with-pages/
 export default (
+
   <Route path="/" component={App}>
     <IndexRoute
       getComponent={(nextState, cb) => {
         require.ensure([], require => {
-          cb(null, require('./modules/Todo/pages/TodoListPage').default);
+          cb(null, require('./modules/App/components/WelcomePage').default);
         });
       }}
     />
     <Route
-      path="/todos"
+      path="/todo"
       getComponent={(nextState, cb) => {
         require.ensure([], require => {
           cb(null, require('./modules/Todo/pages/TodoListPage').default);
@@ -40,4 +42,6 @@ export default (
       }}
     />
   </Route>
+ 
+     
 );
