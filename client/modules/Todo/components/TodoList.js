@@ -7,13 +7,13 @@ function TodoList(props) {
   return (
     <ul>
       {
-        // props.todos.map(todo => (
-        //   <TodoListItem
-        //     todo={todo}
-        //     key={todo.cuid}
-        //     onComplete={() => props.handleCompleteTodo(todo.cuid)}
-        //   />
-        // ))
+        props.todos.map(todo => (
+          <TodoListItem
+            todo={todo}
+            key={todo.cuid}
+            onComplete={() => props.handleCompleteTodo(todo.cuid)}
+          />
+        ))
       }
     </ul>
   );

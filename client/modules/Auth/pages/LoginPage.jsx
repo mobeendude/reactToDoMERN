@@ -66,7 +66,7 @@ if(typeof(Storage) !== "undefined"){
 
 
         // change the current URL to /
-        this.context.router.replace('/todo');
+        this.context.router.replace('/');
       } else {
         // failure
 

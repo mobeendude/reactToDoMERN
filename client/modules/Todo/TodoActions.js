@@ -35,18 +35,21 @@ export function addTodoRequest(todo) {
 }
 
 export function fetchTodos() {
+  console.log("reached todo Action");
   return (dispatch) => {
     return callApi('todos').then(res => dispatch(addTodos(res.todos)));
   };
 }
 
 export function clearCompletedTodoRequest() {
+
   return (dispatch) => {
     return callApi('todos/delete/completed', 'delete').then(() => dispatch(clearCompletedTodo()));
   };
 }
 
 export function completeTodoRequest(cuid) {
+  console.log("reached todo Action Completed");
   return (dispatch) => {
     return callApi(`todos/${cuid}/complete`, 'post').then(() => dispatch(completeTodo(cuid)));
   };

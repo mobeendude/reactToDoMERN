@@ -67,10 +67,10 @@ app.use(bodyParser.json({ limit: '20mb' }));
 app.use(bodyParser.urlencoded({ limit: '20mb', extended: false }));
 app.use(Express.static(path.resolve(__dirname, '../dist')));
 app.use(Express.static(path.resolve(__dirname, './resources')));
-
+app.use('/api/', todos);
 app.use('/api', authCheckMiddleware);
 
-app.use('/api/todos', todos);
+
 app.use('/api/auth', auth);
 const authRoutes = require('./routes/auth');
 app.use('/auth', authRoutes);

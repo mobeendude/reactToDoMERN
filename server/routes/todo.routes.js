@@ -3,15 +3,15 @@ import * as TodoController from '../controllers/todo.controller';
 const router = new Router();
 
 // Get all Todos
-router.route('/').get(TodoController.getTodos);
+router.route('/todos').get(TodoController.getTodos);
 
 // Add a new Todo
-router.route('/').post(TodoController.addTodo);
+router.route('/todos').post(TodoController.addTodo);
 
 // Delete a todo by cuid
-router.route('/delete/completed').delete(TodoController.deleteCompletedTodo);
+router.route('/todos/delete/completed').delete(TodoController.deleteCompletedTodo);
 
 // complete a todo by cuid
-router.route('/:cuid/complete').post(TodoController.completeTodo);
+router.route('/todos/:cuid/complete').post(TodoController.completeTodo);
 
 export default router;
